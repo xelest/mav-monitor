@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mav-monitor"
+version = "0.1.0"
+description = "A single-service system dashboard - no agent, no database, no build step."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "xelest" }]
+keywords = ["monitoring", "dashboard", "psutil", "server", "metrics", "systemd"]
+classifiers = [
+    "Environment :: Web Environment",
+    "Framework :: Flask",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: Python :: 3",
+    "Topic :: System :: Monitoring",
+]
+dependencies = [
+    "Flask>=3.0,<4.0",
+    "Flask-SocketIO>=5.3,<6.0",
+    "flask-cors>=4.0,<7.0",
+    "eventlet>=0.35,<0.41",
+    "psutil>=5.9,<8.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/xelest/mav-monitor"
+Issues = "https://github.com/xelest/mav-monitor/issues"
+
+[project.scripts]
+mavmon = "mav_monitor.__main__:main"
+
+[tool.setuptools]
+packages = ["mav_monitor"]
+
+[tool.setuptools.package-data]
+mav_monitor = ["static/*.html", "static/vendor/*"]

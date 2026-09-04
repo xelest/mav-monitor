@@ -1,0 +1,19 @@
+services:
+  mav-monitor:
+    build:
+      context: ..
+      dockerfile: deploy/Dockerfile
+    image: mav-monitor:local
+    container_name: mav-monitor
+    restart: unless-stopped
+    pid: "host"
+    ports:
+      - "127.0.0.1:8080:8080"
+    environment:
+      MONITOR_HOST: 0.0.0.0
+      MONITOR_PORT: 8080
+      # MONITOR_TOKEN: change-me-if-you-expose-this
+      # MONITOR_SERVICES: ssh,nginx,docker,cron
+      # MONITOR_TERMINAL_TOKEN leave unset to keep the shell disabled
+    volumes:
+      - /:/host:ro

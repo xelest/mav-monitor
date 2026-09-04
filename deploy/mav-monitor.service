@@ -1,0 +1,23 @@
+[Unit]
+Description=MAV Monitor
+After=network.target
+
+[Service]
+Type=simple
+User=CHANGE_ME
+WorkingDirectory=/opt/mav-monitor
+Environment=MONITOR_HOST=127.0.0.1
+Environment=MONITOR_PORT=8080
+# Environment=MONITOR_TOKEN=change-me-if-exposed
+# Environment=MONITOR_SERVICES=ssh,nginx,docker,cron
+# Environment=MONITOR_TERMINAL_TOKEN=       # leave unset to keep the shell disabled
+ExecStart=/opt/mav-monitor/.venv/bin/python -m mav_monitor
+Restart=always
+RestartSec=5
+NoNewPrivileges=true
+ProtectHome=read-only
+ProtectSystem=strict
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
